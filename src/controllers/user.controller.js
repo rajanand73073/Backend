@@ -164,10 +164,9 @@ return res.status(200)
 })
 
 
-//basically asyncHandler is used for hitting webrequest
-const logoutUser  = asyncHandler(async(req,res)=>{
-  // 1.clear cookies 
-  //2. clear refreshtoken from usermodel
-})
 
-export {registerUser,loginUser,logoutUser}
+
+
+
+
+export {registerUser,loginUser}
