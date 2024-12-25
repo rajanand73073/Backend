@@ -122,7 +122,9 @@ const loginUser = asyncHandler(async (req,res)=>{
 // send cookies & respond successfuly loggedin
 
 const {email,username,password} = req.body
-if (!username || !email) {
+console.log("req.body:",req.body);
+
+if (!(username || email) ){
   throw new APIError(400,"Username or email is required")
 }
 //.findOne() method is used to retrieve a single document from a collection that matches a specified query. It’s commonly used when you expect or only need one matching result.
@@ -150,8 +152,8 @@ secure:true
 // when these two value will be stored as true  ,it means it only modified by server
 
 return res.status(200)
-.cookie("accessToken",accessToken,option)
-.cookie("refreshToken",refreshToken,option)
+.cookie("accessToken",accessToken,options)
+.cookie("refreshToken",refreshToken,options)
 .json(
   new ApiResopnse(
     200,{
@@ -164,9 +166,37 @@ return res.status(200)
 })
 
 
+const logoutUser = asyncHandler(async (req,res)=>{
+await User.findByIdAndUpdate(
+req.user.id,{
+  $set :{
+   refreshToken: undefined
+  }
+},
+{
+  new:true
+}
+)
+//for removing cookies
+const options = {
+  httpOnly:true,
+  secure:true
+  }
+  
+  return res
+  .status(200)
+  .clearCookie("accessToken",options)
+  .clearCookie("refreshToken",options)
+  .json(
+    new ApiResopnse(200,{},"User Logged Out Successfully")
+  )
+
+
+  
+}) 
 
 
 
 
 
-export {registerUser,loginUser}
+export {registerUser,loginUser,logoutUser}

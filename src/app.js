@@ -1,7 +1,7 @@
 import express from "express"
 import cors from 'cors'
 import cookieParser from "cookie-parser"
-const app= express()
+const app = express()
 
 
     app.use(cors({
@@ -9,8 +9,8 @@ const app= express()
         credentials:true
     }))
 
-app.use(express.json({limit:"2000kb"}))
-app.use(express.urlencoded({extended:true,limit:"2000kb"}))
+app.use(express.json({limit:"20kb"}))
+app.use(express.urlencoded({extended:true,limit:"20kb"}))
 app.use(express.static('public'))
 app.use(cookieParser())
 

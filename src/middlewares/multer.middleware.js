@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 // Ensure the folder exists
-// const uploadFolder = path.resolve('./public/temp');
+const uploadFolder = path.resolve('./public/temp');
 
 // if (!fs.existsSync(uploadFolder)) {
 //   fs.mkdirSync(uploadFolder, { recursive: true });
